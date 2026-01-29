@@ -5,7 +5,7 @@ const button = document.getElementById("btnMain");
 const input = document.getElementById("input");
 
 button.addEventListener("click", () => {
-    output.textContent = nonRepeatingCharacter(input.value);
+    output.textContent = convertToPairs(input.value);
 
     // output.textContent = checkAnagram("mouth", "thoum")
 
@@ -71,13 +71,15 @@ function checkAnagram(str1, str2) {
 
 function nonRepeatingCharacter(str){
 
-    str = str ?? ""; 
-    const freq = {};
+    str = str.toLowerCase() ?? ""; 
 
-    for (let char of str) {
-        if (char === " ") continue; 
-        freq[char] = (freq[char] ?? 0) + 1;  
-    }
+    const freq = countLettersRaw(str);
+
+    // for (let char of str) {
+    //     if (char === " ") continue; 
+    //     freq[char] = (freq[char] ?? 0) + 1;  
+    // }
+
     for (let char of str) 
     {
         console.log(freq[char]);
@@ -85,5 +87,12 @@ function nonRepeatingCharacter(str){
     }
 
     return "There are no unique values."
+
+}
+
+function convertToPairs(str) {
+
+    const arr = str.split(";");
+    return arr; 
 
 }
