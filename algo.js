@@ -5,7 +5,10 @@ const button = document.getElementById("btnMain");
 const input = document.getElementById("input");
 
 button.addEventListener("click", () => {
-    output.textContent = countLetters(input.value);
+    output.textContent = nonRepeatingCharacter(input.value);
+
+    // output.textContent = checkAnagram("mouth", "thoum")
+
 });
 
 console.log(checkPal("cap"));
@@ -35,8 +38,52 @@ function countLetters(str){
     }
 
     return Object.entries(freq).map(([char, count]) => `${char}:${count}`).join(" "); 
-
 }
 
+function countLettersRaw(str){
+    str = str ?? "";
+    const freq = {};
 
+    for (let char of str) {
+        if (char === " ") continue; 
+        freq[char] = (freq[char] ||  0) + 1; 
+    }
 
+    return freq; 
+}
+
+function checkAnagram(str1, str2) {
+
+     str1 = str1.toLowerCase(); 
+     str2 = str2.toLowerCase(); 
+
+    const str1FreqMap = countLettersRaw(str1);
+    const str2FreqMap = countLettersRaw(str2);
+
+    if (Object.entries(str1FreqMap).length !== Object.entries(str2FreqMap).length) return false;
+
+    for (let char in str1FreqMap) {
+        if (str1FreqMap[char] !== str2FreqMap[char]) return false; 
+    }
+
+    return true; 
+}
+
+function nonRepeatingCharacter(str){
+
+    str = str ?? ""; 
+    const freq = {};
+
+    for (let char of str) {
+        if (char === " ") continue; 
+        freq[char] = (freq[char] ?? 0) + 1;  
+    }
+    for (let char of str) 
+    {
+        console.log(freq[char]);
+        if (freq[char] === 1) return `${char} is the first non-repeating character!`;
+    }
+
+    return "There are no unique values."
+
+}
