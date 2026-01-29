@@ -5,9 +5,8 @@ const button = document.getElementById("btnMain");
 const input = document.getElementById("input");
 
 button.addEventListener("click", () => {
-    output.textContent = convertToPairs(input.value);
 
-    // output.textContent = checkAnagram("mouth", "thoum")
+    output.textContent = convertToPairs(input.value);
 
 });
 
@@ -75,11 +74,6 @@ function nonRepeatingCharacter(str){
 
     const freq = countLettersRaw(str);
 
-    // for (let char of str) {
-    //     if (char === " ") continue; 
-    //     freq[char] = (freq[char] ?? 0) + 1;  
-    // }
-
     for (let char of str) 
     {
         console.log(freq[char]);
@@ -93,6 +87,18 @@ function nonRepeatingCharacter(str){
 function convertToPairs(str) {
 
     const arr = str.split(";");
-    return arr; 
+    let resultArr = []; 
+    
+    for (let element of arr)
+    {
+        let pair = element.split(",");
+        resultArr.push(pair);
+    }
 
+    for (let element of resultArr)
+    {
+        console.log(element); 
+    }
 }
+
+// a,1;c,2;d,3;b,4
